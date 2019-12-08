@@ -1,0 +1,16 @@
+# Economic relationship between inflation and unemployment
+
+# Importing the dataset
+SG_dataset = read.csv("C:\\Users\\Chang Foo Yong\\Desktop\\GitHub\\Singapore_Inf_Unem.csv", header=TRUE, sep=",")
+
+# Visualising plot of inflation rate against unemployment rate
+# install.packages('ggplot2')
+library(ggplot2)
+ggplot() +
+  geom_point(aes(x = SG_dataset$Inflation_Average_Consumer_Prices, y = SG_dataset$Unemployment_rate),
+             colour = 'red') +
+  geom_point(aes(x = SG_dataset$Inflation_EOP_Consumer_Prices, y = SG_dataset$Unemployment_rate),
+             colour = 'blue') +
+  ggtitle('Singapore: Annual Average (Red) & End-of-Period (Blue) Inflation vs Unemployment') +
+  xlab('Annual Inflation (Average, End-of-Period)') +
+  ylab('Unmployment Rate')
