@@ -1,0 +1,23 @@
+# Economic relationship between interest rate (SGD) and exchange rate (SGD per USD)
+
+# Importing the dataset
+SG_dataset = read.csv("C:\\Users\\Chang Foo Yong\\Desktop\\GitHub\\SGD exch int rate\\SGD_exch_int_dataset.csv", header=TRUE, sep=",")
+
+# Taking care of missing data
+SG_dataset$SGD_interest_rate = ifelse(is.na(SG_dataset$SGD_interest_rate),
+                                      ave(SG_dataset$SGD_interest_rate, FUN = function(x) mean(x, na.rm = TRUE)),
+                                      SG_dataset$SGD_interest_rate) # this replaces missing value in col SGD_interest_rate by mean of col SGD_interest_rate
+
+SG_dataset$SGD_per_USD = ifelse(is.na(SG_dataset$SGD_per_USD),
+                                ave(SG_dataset$SGD_per_USD, FUN = function(x) mean(x, na.rm = TRUE)),
+                                SG_dataset$SGD_per_USD) # this replaces missing value in col SGD_per_USD by mean of col SGD_per_USD
+
+# Visualising plot of interest rate against exchange rate
+# install.packages('ggplot2')
+library(ggplot2)
+ggplot() +
+  geom_point(aes(x = SG_dataset$ SGD_interest_rate, y = SG_dataset$ SGD_per_USD),
+             colour = 'red') +
+  ggtitle('Relationship between SGD interest rate and SGD per USD exchange rate (month-end, 2013 Jan to 2019 Aug)') +
+  xlab('SGD interest rate') +
+  ylab('Exchange rate (SGD per USD)')
